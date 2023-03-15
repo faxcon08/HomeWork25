@@ -1,0 +1,23 @@
+SELECT * FROM employee;
+id | first_name | last_name | gender | age
+----+------------+-----------+--------+-----
+  3 | Petrova    | Elena     | female |  35
+  1 | Simonova   | Galina    | female |  28
+(2 строки)
+
+\echo Task 1
+INSERT INTO employee (first_name,last_name, gender, age) VALUES ('Medvedev','Igor','male',22);
+INSERT INTO employee (first_name,last_name, gender, age) VALUES ('Solovev','Vasiliy','male',33);
+INSERT INTO employee (first_name,last_name, gender, age) VALUES ('Mihailov','Petr','male',18);
+SELECT first_name AS Фамилия, last_name AS Имя FROM employee;
+SELECT * FROM employee WHERE age < 30 OR age > 50;
+SELECT * FROM employee WHERE age BETWEEN 30 AND 50;
+SELECT * FROM employee ORDER BY first_name DESC;
+SELECT * FROM employee WHERE last_name LIKE '_____%';
+\echo Task 2
+UPDATE employee SET last_name='Elena' WHERE id = 1;
+UPDATE employee SET last_name='Igor' WHERE id = 7;
+SELECT last_name AS Имя, SUM(age) as Суммарный_возраст FROM employee GROUP BY last_name;
+SELECT last_name AS Имя, age AS Возраст FROM employee WHERE age = (
+SELECT MIN(age) FROM employee);
+SELECT last_name, MAX(age) FROM employee GROUP BY last_name HAVING NOT COUNT(last_name) = 1 ORDER BY MAX(age) ASC;
